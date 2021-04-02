@@ -1,4 +1,9 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Fibonachi {
 	
@@ -30,26 +35,31 @@ public class Fibonachi {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Fibonachi f = new Fibonachi();
-		Scanner in = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		int N = in.nextInt();
+		int N = Integer.parseInt(br.readLine());
 		
 		static_arr[1][1] = 1;
 		static_arr[0][0] = 1;
 		
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < N; i++) {
-			int n = in.nextInt();
+			int n = Integer.parseInt(st.nextToken());
 			
 			int[] arr = f.fibonachi(n);
 			
 			for(int j = 0; j < 2; j++) {
-				System.out.print(arr[j] + " ");
+				bw.write(String.valueOf(arr[j]) + " ");
 			}
-			System.out.println();
+			bw.newLine();
 			
 		}
+		
+		bw.flush();
+		bw.close();
 	}//main
 
 }
