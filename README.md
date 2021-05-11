@@ -123,7 +123,36 @@ static_arr에서 이미 구한 값들을 담아 나중에 해당 값을 호출�
 이 블로그의 내용을 토대로 하면
 기존 무게의 최대 가치와 (최대무게 - 들어온 무게) 인덱스와 들어온 가치를 비교해 새로 들어온 가치가 크다면 갱신 그렇지 않으면 유지를 하는 방법입니다.
 
-백준 알고리즘 12865번 문제에서 제시한 예시대로 6kg - 13value / 4kg - 8value / 3kg - 6value / 5kg - 12value 이런식으로 무게와 가치가 주어집니다.
+-소스코드
+```java
+import java.util.Scanner;
 
-1. 6kg 짜리 무게가 들어올 경우
-
+public class Backpack {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		
+		int N = in.nextInt();
+		int max_weight = in.nextInt();
+		int[] weight = new int[max_weight + 1];
+		
+		int[][] arr = new int[N][2];
+		
+		for(int i = 0; i < N; i++) {
+			arr[i][0] = in.nextInt();
+			arr[i][1] = in.nextInt();
+		}
+		
+		for(int i = 0; i < N; i++) {
+			for(int j = max_weight; j - arr[i][0] >= 0; j--) {
+				if(weight[j] < weight[j - arr[i][0]] + arr[i][1]) {//기존 무게의 최대 가치가 최대무게 - 들어온 무게 의 인덱스 와 새로 들어온 가치를 더한 값보다 작으면 갱신
+					weight[j] = weight[j - arr[i][0]] + arr[i][1];
+				}
+			}
+		}
+		
+		System.out.println(weight[max_weight]);
+	}
+	
+}
+```
