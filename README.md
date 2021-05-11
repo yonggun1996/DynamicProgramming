@@ -102,3 +102,57 @@ public class Fibonachi {
 static_arr에서 이미 구한 값들을 담아 나중에 해당 값을 호출하면 static_arr에 있는 값을 반환해 시간을 줄일 수 있습니다.
 
 이러한 방법으로 피보나치 수열을 빠르게 구할 수 있습니다.
+
+### 냅색 알고리즘 : 흔히들 이 알고리즘은 배낭문제 알고리즘으로 알고 있습니다. 배낭에 넣을 수 있는 최대 용량과 각 짐에 가치가 주어지면 최대용량내에 가장 많은 가치를 넣는 방법을 찾아내는 알고리즘 입니다.
+
+이 알고리즘을 생각할 때 여러 방법을 생각할 수 있습니다.
+
+1. 무게가 낮은 것부터 담아보기
+예를 들어 1kg, 3kg, 5kg 물건이 있고 각각의 가치는 2,4,7이라고 가정합시다. 참고로 용량은 5kg입니다.
+
+무게가 낮은 것 부터 들어간다면 1kg, 3kg 2개가 들어가고 가치는 6이 됩니다. 하지만 5kg 하나를 넣으면 가치는 7이 되기 때문에 이 방법은 틀리는 경우가 나올 수 있습니다.
+
+2. 가치가 큰 것부터 넣기
+위와 무게는 동일하게 1kg, 3kg, 5kg 물건이 있고, 가치는 각각 2,4,5 라고 가정합시다. 마찬가지로 용량은 5kg 입니다.
+
+가치가 큰 것부터 들어가면 5kg 하나만 들어갈 수 있으며 가치는 5 입니다. 하지만 1kg, 3kg물건을 넣으면 가치는 6이 되기 때문에 이 방법도 틀리는 경우가 나올 수 있습니다.
+
+그래서 이 문제는 이런식으로 풀어야 합니다.
+※ 냅색 알고리즘 문제를  푸는데 가장 도움이 된 블로그 : https://chanhuiseok.github.io/posts/improve-6/
+
+이 블로그의 내용을 토대로 하면
+기존 무게의 최대 가치와 (최대무게 - 들어온 무게) 인덱스와 들어온 가치를 비교해 새로 들어온 가치가 크다면 갱신 그렇지 않으면 유지를 하는 방법입니다.
+
+-소스코드
+```java
+import java.util.Scanner;
+
+public class Backpack {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		
+		int N = in.nextInt();
+		int max_weight = in.nextInt();
+		int[] weight = new int[max_weight + 1];
+		
+		int[][] arr = new int[N][2];
+		
+		for(int i = 0; i < N; i++) {
+			arr[i][0] = in.nextInt();
+			arr[i][1] = in.nextInt();
+		}
+		
+		for(int i = 0; i < N; i++) {
+			for(int j = max_weight; j - arr[i][0] >= 0; j--) {
+				if(weight[j] < weight[j - arr[i][0]] + arr[i][1]) {//기존 무게의 최대 가치가 최대무게 - 들어온 무게 의 인덱스 와 새로 들어온 가치를 더한 값보다 작으면 갱신
+					weight[j] = weight[j - arr[i][0]] + arr[i][1];
+				}
+			}
+		}
+		
+		System.out.println(weight[max_weight]);
+	}
+	
+}
+```
