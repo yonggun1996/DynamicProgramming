@@ -156,3 +156,49 @@ public class Backpack {
 	
 }
 ```
+
+### LCS(Longest Common Subsequence) : 최장 공통 부분 수열로 여러 개의 문자가 순서를 이루는 수열이 여러개가 있다고 칠 때 가장 긴 수열을 찾는 문제입니다.
+
+이 문제를 푸는 방법
+
+- 우선 문자열이 2개가 주어지는데 하나를 기준으로 잡고 다른 문자열은 알파벳 하나씩 비교합니다. 이때 같은 알파벳, 다른 알파벳에 대한 알고리즘이 다릅니다.
+- 같은 알파벳을 만날 경우
+	- 각 알파벳의 문자를 하나씩 제거했을 때 LCS의 길이에 1을 더합니다. 이것은 그 이전까지 최장 공통 부분 수열의 문자열 길이에 또 맞는 문자가 들어왔기 때문에 +1을 해줍니다.
+- 다른 알파벳을 만날 경우
+	- 기존에 이어오던 과정 중 큰 값이 이어집니다.
+-소스코드
+```java
+import java.util.Scanner;
+
+public class LCS {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		
+		String str1 = in.next();
+		String str2 = in.next();
+		
+		int[][] arr = new int[str1.length() + 1][str2.length() + 1];
+		
+		for(int i = 1; i <= str1.length(); i++) {
+			for(int j = 1; j <= str2.length(); j++) {
+				if(str1.charAt(i - 1) == str2.charAt(j - 1)) {//문자가 같을 경우 한 글자씩 뺀 결과에 1을 더해 저장한다
+					arr[i][j] = arr[i - 1][j - 1] + 1;
+				}else {//그렇지 않을 경우 왼쪽이나 상단에 값 중 더 큰 값을 저장한다
+					int num1 = arr[i - 1][j];
+					int num2 = arr[i][j - 1];
+					
+					if(num1 > num2) {
+						arr[i][j] = num1;
+					}else {
+						arr[i][j] = num2;
+					}
+				}
+			}
+		}
+		
+		System.out.println(arr[str1.length()][str2.length()]);
+	}
+
+}
+```
