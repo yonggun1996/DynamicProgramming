@@ -30,7 +30,7 @@ public class IntegerTriangle {
 					
 					if(num1 > num2) {
 						arr[i][j] += num1;
-					}else if(num1 < num2) {
+					}else {
 						arr[i][j] += num2;
 					}
 				}

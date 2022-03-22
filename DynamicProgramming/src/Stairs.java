@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class Stairs {
 	
-	static int[] stair_score;
-	static int[][] sum_score;
+	static int[] stair_score;//입력받은 계단의 점수
+	static int[][] sum_score;//현재 위치와 이전위치의 점수를 담은 배열
+	//sum_score는 Dynamic Programming 구현을 위해 미리 값을 담고 나중에 값을 불러와 
 
 	public static void main(String[] args) {
 		Stairs s = new Stairs();

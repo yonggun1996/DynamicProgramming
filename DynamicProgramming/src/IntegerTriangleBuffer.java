@@ -37,9 +37,9 @@ public class IntegerTriangleBuffer {
 					long num1 = arr[i - 1][j - 1];
 					long num2 = arr[i - 1][j];
 					
-					if(num1 > num2) {
+					if(num1 > num2) {//좌상방면 숫자가 더 큰경우 그 인덱스의 숫자를 누적
 						arr[i][j] += num1;
-					}else if(num1 < num2) {
+					}else {//바로위 인덱스의 숫자가 더 크면 그 인덱스의 숫자를 누적
 						arr[i][j] += num2;
 					}
 				}

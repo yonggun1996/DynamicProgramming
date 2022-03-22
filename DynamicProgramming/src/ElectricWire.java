@@ -19,6 +19,7 @@ public class ElectricWire {
 			arr[i][1] = in.nextInt();
 		}
 		
+		//[i][0]번째를 기준으로 2차원 배열을 정렬을 한 후 [i][1]번째 수를 기준으로 배열을 만든다
 		Arrays.sort(arr, new Comparator<int[]>() {
 
 			@Override
@@ -34,7 +35,7 @@ public class ElectricWire {
 		
 		int j = 0;
 		for(int i = 1; i < size; i++) {
-			if(list.get(j) < arr[i][1]) {
+			if(list.get(j) < arr[i][1]) {//arr[i][1]가 크면 리스트에 계속 붙여준다
 				list.add(arr[i][1]);
 				j++;
 			}else {
@@ -43,10 +44,10 @@ public class ElectricWire {
 			}
 		}
 		
-		System.out.println(size - list.size());
+		System.out.println(size - list.size());//입력받은 사이즈와 이어진 배열의 개수를 빼면 빼야할 전신줄의 갯수가 나옵니다.
 	}
 	
-	public int binarySearch(int start, int finish, int num) {
+	public int binarySearch(int start, int finish, int num) {//갱신할 위치를 찾는 메소드
 		while(start < finish) {
 			int mid = (start + finish) / 2;
 			
